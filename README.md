@@ -8,7 +8,7 @@ Il s'agit d'un de mes récents projets que je n'avais pas mis en conf. Ce cours 
 Attention le fichier Fritzing n'est pas lisible sur Github. (http://fritzing.org/home/)
 
 
-V1.4 : 
+
 - Arduino Uno
 - Ethernet Shield
 - LCD4884 LCD Shield (http://tronixstuff.com/2011/03/12/the-dfrobot-lcd4884-lcd-shield/)
@@ -32,6 +32,7 @@ Changelog before the first commit on Github :
 - V1.1=>V1.2 : Changement pin analogique pour mettre le shield LCD4884
 - V1.2=>V1.3 : Adaptation des Pins pour utilisation du shield Ethernet. (10-11-12-13 non utilisable) il ne reste plus que 8-9-(0-1 non accessible mais dispo) 
 - V1.2=>V1.4 : utilisation de la lib xively
+- V1.4=>V1.5 : Ajout d'un nombre de dépassement de seuil avant de lancer l'arrosage. (pour éviter les glitchs de données non voulus). Affichage du nombre d'essais à l'écran.
 
 
 A FAIRE : 
@@ -39,4 +40,4 @@ A FAIRE :
 - supprimer le shield LCD
 - supprimer le shield Ethernet => remplacer par le WEDO de DFRObot avec wifi intégré.
 - ajouter un petit écran OLED pour test.
-- ...
+- miniaturiser le tout avec un Pro Mini ou le Lil'Nardo.
