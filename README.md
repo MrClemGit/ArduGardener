@@ -21,14 +21,12 @@ V1.4 :
 
 Changelog before the first commit on Github : 
 
-//Algo d'ouverture de la valve pendant un temps T puis attente pendant un certain (attente de l'impregnation de l'eau) et relancer la detection de secheresse
-//Ajout Ecran pour message voir configuration des temps : OK
-//Utilisation de la shield Ethernet pour envoi de donnée sur serveur ou sd card pour log. OK
-//V1.1=>V1.2
-//Changement pin analogique pour mettre le shield LCD4884
-//V1.2=>V1.3
-//Adaptation des Pins pour utilisation du shield Ethernet. (10-11-12-13 non utilisable) il ne reste plus que 8-9-(0-1 non accessible mais dispo) 
-//V1.2=>V1.4 utilisation de la lib xively
+- Algo d'ouverture de la valve pendant un temps T puis attente pendant un certain (attente de l'impregnation de l'eau) et relancer la detection de secheresse
+- Ajout Ecran pour message voir configuration des temps : OK
+- Utilisation de la shield Ethernet pour envoi de donnée sur serveur ou sd card pour log. OK
+- V1.1=>V1.2 : Changement pin analogique pour mettre le shield LCD4884
+- V1.2=>V1.3 : Adaptation des Pins pour utilisation du shield Ethernet. (10-11-12-13 non utilisable) il ne reste plus que 8-9-(0-1 non accessible mais dispo) 
+- V1.2=>V1.4 : utilisation de la lib xively
 
 
 A FAIRE : 
