@@ -19,6 +19,9 @@
 char xivelyKey[] = "n4XEgDceFq6VjOM6ZOxY09OvEx8z1V9azBAkN4q8eadi8YoK"; // enter the key, under API Keys
 unsigned long feedId = /*297694980*/1530032864; // enter your feed ID, under Activated
 int frequency = 330; // delay between updates (seconds)
+unsigned int WateringTime = 6000; //2s
+#define WateringLevel 330
+#define TrybeforeWatering 3 // must be 3 times at the WateringLevel before watering  (avoiding clitches)
 
 // Define the strings for our datastream IDs
 char sensorId[] = "sensor1";
@@ -45,7 +48,7 @@ XivelyClient xivelyclient(client);
 
 #define MENU_X	1		// 0-83
 #define MENU_Y	0		// 0-5
-#define WateringLevel 330
+
 char string[30];
 
 int PinAnalogiqueHumidite=1;       //Broche Analogique de mesure d'humidité
@@ -54,9 +57,11 @@ int PinAlim=/*10*/9;
 //int PinLed=11;    //LED témoin de seuil de  sécheresse
 int PinValve=8;
 
-unsigned int WateringTime = 4000; //2s
+
 int hsol;  //Humidite su sol, mesure analogique
 int secheresse=0;  //0 ou 1 si seuil atteint
+
+int i_try = 0;
 
 void setup()
 { // Initialisation
@@ -100,6 +105,8 @@ void setup()
   sprintf(string,"%d.%d.%d.%d",Ethernet.localIP()[0],Ethernet.localIP()[1],Ethernet.localIP()[2],Ethernet.localIP()[3]);
     lcd.LCD_write_string(MENU_X, MENU_Y + 5, string, MENU_NORMAL);
     
+    
+    
 }
 
 void ActiveValve()
@@ -131,7 +138,13 @@ void DisplayValue(int i_iValue,int i_iSeuil)
     memset(string,'\0',30);
     sprintf(string,"Value %03d (%d)",i_iValue,i_iSeuil);
     lcd.LCD_write_string(MENU_X, MENU_Y + 1, string, MENU_NORMAL);
-    
+    if (i_try > 0)
+    {
+      sprintf(string,"Try (%d)",i_try);
+      lcd.LCD_write_string(MENU_X, MENU_Y + 2, string, MENU_NORMAL);
+    }
+    else
+      lcd.LCD_write_string(MENU_X, MENU_Y + 2, "", MENU_NORMAL);
 }
 void WaitDisplay(int i_iSecond)
 {
@@ -168,15 +181,20 @@ void loop() { //boucle principale
     if (hsol >= WateringLevel)
     {
 //      digitalWrite(PinLed, HIGH);   // LED allumée
-      lcd.backlight(ON);
-      secheresse=1;
-     
-      Watering(WateringTime);
+      if (i_try == 3)
+      {
+        lcd.backlight(ON);
+        secheresse=1;
+        Watering(WateringTime);
+      }
+      
+      i_try++;
     }
     else 
     {
       lcd.backlight(OFF);
-      secheresse=0; 
+      secheresse=0;
+      i_try = 0; 
           
 //      digitalWrite(PinLed, LOW);   // LED off
     }
