@@ -3,6 +3,10 @@ ArduGardener
 
 Humidity detection and automatic watering with arduino
 
+
+Il s'agit d'un de mes récents projets que je n'avais pas mis en conf. Ce cours sur git me permet de le mettre sur Github. 
+
+
 V1.4 : 
 - Arduino Uno
 - Ethernet Shield
