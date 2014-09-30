@@ -10,41 +10,14 @@
 
 #include "LCD4884.h"
 #include <SPI.h>
-/*#include <Ethernet.h>
-#include <HttpClient.h>
-#include <Xively.h>*/
+
 
 //#define _TRACE
-// Your Xively key to let you upload data
-/*char xivelyKey[] = "n4XEgDceFq6VjOM6ZOxY09OvEx8z1V9azBAkN4q8eadi8YoK"; // enter the key, under API Keys
-unsigned long feedId = 1530032864; // enter your feed ID, under Activated*/
+
 int frequency = 330; // delay between updates (seconds)
 unsigned int WateringTime = 6000; //2s
 #define WateringLevel 330
 #define TrybeforeWatering 3 // must be 3 times at the WateringLevel before watering  (avoiding clitches)
-
-// Define the strings for our datastream IDs
-/*char sensorId[] = "sensor1";
-char sensor2Id[] = "drought1";*/
-
-/*XivelyDatastream datastreams[] = {
-  XivelyDatastream(sensorId, strlen(sensorId), DATASTREAM_INT),
-  XivelyDatastream(sensor2Id, strlen(sensor2Id), DATASTREAM_INT),
-};*/
-// Finally, wrap the datastreams into a feed
-//XivelyFeed feed(feedId, datastreams, 2 /* number of datastreams */);
-
-// assign a MAC address for the ethernet controller.
-// Newer Ethernet shields have a MAC address printed on a sticker on the shield
-// fill in your address here:
-//byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
-
-// fill in an available IP address on your network here,
-// for manual configuration:
-//IPAddress ip(192,168,1,27);
-// initialize the library instance:
-//EthernetClient client;
-//XivelyClient xivelyclient(client);
 
 #define MENU_X	1		// 0-83
 #define MENU_Y	0		// 0-5
@@ -82,32 +55,7 @@ void setup()
     digitalWrite(PinValve, LOW);
     
     init_MENU();
-    // start the Ethernet connection:
-  /*lcd.LCD_write_string(MENU_X, MENU_Y + 5, "DHCP...", MENU_NORMAL);
-  if (Ethernet.begin(mac) == 0) 
-  {
-    Serial.println("Failed to configure Ethernet using DHCP");
-    lcd.LCD_write_string(MENU_X, MENU_Y + 4, "DHCP KO", MENU_NORMAL);
-    lcd.LCD_write_string(MENU_X, MENU_Y + 4, "IP Fixe...", MENU_NORMAL);
-    // DHCP failed, so use a fixed IP address:
-    Ethernet.begin(mac, ip);
-  }
-  else
-    lcd.LCD_write_string(MENU_X, MENU_Y + 5, "DHCP OK", MENU_NORMAL);
-  
-  Serial.print("My IP address: ");
-  for (byte thisByte = 0; thisByte < 4; thisByte++) 
-  {
-    // print the value of each byte of the IP address:
-    Serial.print(Ethernet.localIP()[thisByte], DEC);
-    Serial.print("."); 
-  }
- 
- sprintf(string,"%d.%d.%d.%d",Ethernet.localIP()[0],Ethernet.localIP()[1],Ethernet.localIP()[2],Ethernet.localIP()[3]);
-    lcd.LCD_write_string(MENU_X, MENU_Y + 5, string, MENU_NORMAL);
-  */  
-    
-    
+   
 }
 
 void ActiveValve()
@@ -171,8 +119,6 @@ void loop() { //boucle principale
     delay(10);
     hsol = analogRead(PinAnalogiqueHumidite); // Lit la tension analogique
     digitalWrite(PinAlim, LOW);
- //   secheresse = digitalRead(PinNumeriqueHumidite);
-//     secheresse=0;
     
     //oscillo processing
     /*Serial.write( 0xff );
@@ -204,21 +150,7 @@ void loop() { //boucle principale
     Serial.println(hsol); // afficher la mesure
     Serial.print("  ");
     Serial.println(secheresse);  //0 ou 1 si le seuil est dépassé
-    
-    
-    
-    /*datastreams[0].setInt(hsol);
-    datastreams[1].setInt(secheresse);*/
-    Serial.print("Moisture: ");
-    Serial.print(datastreams[0].getInt());
-    Serial.print("drought: ");
-    Serial.print(datastreams[1].getInt());
-    /*Serial.println("Uploading it to Xively");
-    int ret = xivelyclient.put(feed, xivelyKey);
-    Serial.print("xivelyclient.put returned ");
-    Serial.println(ret);
-    Serial.println();*/
-   
+        
     WaitDisplay(frequency);
     
     
