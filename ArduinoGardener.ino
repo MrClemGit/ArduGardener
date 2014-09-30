@@ -10,41 +10,41 @@
 
 #include "LCD4884.h"
 #include <SPI.h>
-#include <Ethernet.h>
+/*#include <Ethernet.h>
 #include <HttpClient.h>
-#include <Xively.h>
+#include <Xively.h>*/
 
 //#define _TRACE
 // Your Xively key to let you upload data
-char xivelyKey[] = "n4XEgDceFq6VjOM6ZOxY09OvEx8z1V9azBAkN4q8eadi8YoK"; // enter the key, under API Keys
-unsigned long feedId = /*297694980*/1530032864; // enter your feed ID, under Activated
+/*char xivelyKey[] = "n4XEgDceFq6VjOM6ZOxY09OvEx8z1V9azBAkN4q8eadi8YoK"; // enter the key, under API Keys
+unsigned long feedId = 1530032864; // enter your feed ID, under Activated*/
 int frequency = 330; // delay between updates (seconds)
 unsigned int WateringTime = 6000; //2s
 #define WateringLevel 330
 #define TrybeforeWatering 3 // must be 3 times at the WateringLevel before watering  (avoiding clitches)
 
 // Define the strings for our datastream IDs
-char sensorId[] = "sensor1";
-char sensor2Id[] = "drought1";
+/*char sensorId[] = "sensor1";
+char sensor2Id[] = "drought1";*/
 
-XivelyDatastream datastreams[] = {
+/*XivelyDatastream datastreams[] = {
   XivelyDatastream(sensorId, strlen(sensorId), DATASTREAM_INT),
   XivelyDatastream(sensor2Id, strlen(sensor2Id), DATASTREAM_INT),
-};
+};*/
 // Finally, wrap the datastreams into a feed
-XivelyFeed feed(feedId, datastreams, 2 /* number of datastreams */);
+//XivelyFeed feed(feedId, datastreams, 2 /* number of datastreams */);
+
 // assign a MAC address for the ethernet controller.
 // Newer Ethernet shields have a MAC address printed on a sticker on the shield
 // fill in your address here:
-byte mac[] = {
-  0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
+//byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
 
 // fill in an available IP address on your network here,
 // for manual configuration:
-IPAddress ip(192,168,1,27);
+//IPAddress ip(192,168,1,27);
 // initialize the library instance:
-EthernetClient client;
-XivelyClient xivelyclient(client);
+//EthernetClient client;
+//XivelyClient xivelyclient(client);
 
 #define MENU_X	1		// 0-83
 #define MENU_Y	0		// 0-5
@@ -83,7 +83,7 @@ void setup()
     
     init_MENU();
     // start the Ethernet connection:
-  lcd.LCD_write_string(MENU_X, MENU_Y + 5, "DHCP...", MENU_NORMAL);
+  /*lcd.LCD_write_string(MENU_X, MENU_Y + 5, "DHCP...", MENU_NORMAL);
   if (Ethernet.begin(mac) == 0) 
   {
     Serial.println("Failed to configure Ethernet using DHCP");
@@ -102,9 +102,10 @@ void setup()
     Serial.print(Ethernet.localIP()[thisByte], DEC);
     Serial.print("."); 
   }
-  sprintf(string,"%d.%d.%d.%d",Ethernet.localIP()[0],Ethernet.localIP()[1],Ethernet.localIP()[2],Ethernet.localIP()[3]);
+ 
+ sprintf(string,"%d.%d.%d.%d",Ethernet.localIP()[0],Ethernet.localIP()[1],Ethernet.localIP()[2],Ethernet.localIP()[3]);
     lcd.LCD_write_string(MENU_X, MENU_Y + 5, string, MENU_NORMAL);
-    
+  */  
     
     
 }
@@ -206,17 +207,17 @@ void loop() { //boucle principale
     
     
     
-    datastreams[0].setInt(hsol);
-    datastreams[1].setInt(secheresse);
+    /*datastreams[0].setInt(hsol);
+    datastreams[1].setInt(secheresse);*/
     Serial.print("Moisture: ");
     Serial.print(datastreams[0].getInt());
     Serial.print("drought: ");
     Serial.print(datastreams[1].getInt());
-    Serial.println("Uploading it to Xively");
+    /*Serial.println("Uploading it to Xively");
     int ret = xivelyclient.put(feed, xivelyKey);
     Serial.print("xivelyclient.put returned ");
     Serial.println(ret);
-    Serial.println();
+    Serial.println();*/
    
     WaitDisplay(frequency);
     
